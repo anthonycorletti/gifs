@@ -1,0 +1,195 @@
+---
+---
+
+@import "normalize";
+
+// Mixins & Vars
+
+$navy_bg:             #263648;
+$navy_bg_light:       #2f4358;
+$blue_text_drk:       #6784a2;
+$blue_text:           #66adfb;
+$blue_text_lht:       #97afc8;
+$blue_light:          #d2dae3;
+$green:               #00bd9c;
+$red:                 #ff6d6f;
+$yellow:              #f8f65e;
+$purple:              #d070d1;
+
+@mixin sans {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@mixin sans_light {
+  @include sans;
+  font-weight: 300;
+}
+
+@mixin sans_regular {
+  @include sans;
+  font-weight: 400;
+}
+@mixin sans_extrabold {
+  @include sans;
+  font-weight: 800;
+}
+
+// @group main styles --------------------
+
+html { background-color: $navy_bg; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body{
+  @include sans_regular;
+  font-size:16px;
+  line-height:1.5;
+  background-color: $navy_bg_light;
+}
+
+.page-header {
+  width: 300px; height: 100%;
+  background-color: $navy_bg;
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  color: $blue_text_lht;
+
+  @media (max-width: 600px) {
+    position: static;
+    width: auto;
+    padding-bottom: 20px;
+  }
+
+  h1 {
+    @include sans_extrabold;
+    color: white;
+    letter-spacing: -.05em;
+    font-size: 2rem;
+  }
+
+  .img-preview {
+    width: 100%;
+    height: 170px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    @media (max-width: 600px) { height: 300px; }
+    @media (max-width: 500px) { height: 250px; }
+    @media (max-width: 400px) { height: 200px; }
+  }
+
+  .banner-img {
+    width: 100%;
+    z-index: 1;
+  }
+
+  .gif-preview {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: none;
+
+    &[src*=".gif"] { display: block; }
+
+  }
+
+  a {
+    color: $green;
+    font-weight: bold; }
+}
+
+.gif-listing {
+  margin-left: 300px;
+  padding: 20px;
+  overflow: hidden;
+
+  @media (max-width: 600px) { margin-left: 0; }
+
+  // Style the list of categories
+
+  > ul {
+    margin: 0; padding: 0;
+    list-style: none;
+    // experimental column support
+    -moz-column-gap: 20px;
+    -moz-column-fill: auto;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+    -webkit-column-fill: auto;
+    column-count: 3;
+    column-gap: 20px;
+    column-fill: auto;
+
+    @media (max-width: 1024px) {
+      -webkit-column-count: 2;
+      column-count: 2;
+    }
+    @media (max-width: 895px) {
+      -webkit-column-count: 1;
+      column-count: 1;
+    }
+
+    // Style individual category cards
+    > li {
+      background-color: $navy_bg;
+      border-radius: 10px;
+      padding: 6px 10px;
+      margin: 0 0 20px 0;
+      text-transform: capitalize;
+      font-size: 24px;
+      //  experimental column support
+      -moz-column-break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      column-break-inside: avoid;
+      color: $green;
+
+      // Style the sub-list of gifs
+      > ul {
+        padding: 5px 0 0;
+        list-style: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        // Style individual gif listing items
+        > li {
+          text-overflow: ellipsis;
+          width: 100%;
+          overflow: hidden;
+          font-size: 16px;
+          text-transform: none;
+          background-color: $navy_bg_light;
+          border-radius: 5px;
+          padding: 0;
+          margin: 0 0 5px 0;
+
+          // Style individual gif links
+          a {
+            color: $blue_text_lht;
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+          }
+
+          &:hover {
+            background-color: #3a5066;
+
+            a {
+              color: $blue_light;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//  @end main styles
